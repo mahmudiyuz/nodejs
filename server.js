@@ -4,7 +4,7 @@ const path = require("path");
 
 const server = http.createServer((req, res) => {
   if (req.method === "GET") {
-    res.writeHead(200, { "content-type": "text/html charset=utf-8" });
+    // res.writeHead(200, { "content-type": "text/html charset=utf-8" });
 
     if (req.url === "/") {
       fs.readFile(
@@ -36,6 +36,17 @@ const server = http.createServer((req, res) => {
           res.end(data);
         }
       );
+    } else if (req.url === "/api/admin") {
+      res.writeHead(200, { "content-type": "text/json" });
+
+      const adminInfo = {
+        name: "Muhammadqodir",
+        surname: "Xasanov",
+        age: 19,
+        job: "Software engineer",
+      };
+
+      res.end(JSON.stringify(adminInfo));
     }
   } else if (req.method === "POST") {
     const body = [];
